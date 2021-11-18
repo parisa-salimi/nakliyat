@@ -11,9 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', 'homeController@index')->name('anasayfa');
+Route::get('/profile', 'profileController@index')->name('profile');
+Route::get('/hakimizda', 'hakimizdaController@index')->name('hakimizda');
+
+
+Route::get('/blog', 'blogController@index')->name('blog');
+Route::get('/blog/{slug}' , 'blogController@blogslug')->name('blogslug');
+Route::get('/teklifler', 'teklifController@index')->name('teklif');
+
+Route::get('/firma/{slug}', 'firmaController@firmaslug')->name('firmaslug');
 
 
 Route::group(['prefix' => 'admin'], function () {

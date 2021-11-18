@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use App\Firma;
+use App\HizmetVerilenSehirler;  
 
 use Illuminate\Support\ServiceProvider;
 
@@ -24,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->share('firma',Firma::get());
+        view()->share('sehirler',HizmetVerilenSehirler::get());
     }
 }
