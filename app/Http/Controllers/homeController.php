@@ -12,6 +12,7 @@ use App\Bloglar;
 use App\HomeSlider;
 use App\TeklifAlmaAsamasi;
 use App\Blog;
+use Illuminate\Support\Facades\Auth;
 
 class homeController extends Controller
 {
@@ -24,7 +25,7 @@ class homeController extends Controller
         $comment=Comment::get();
         $sorular= SorulanSorular::get();
      
-
+        //dd(Auth::user());
 
         return view('anasayfa',compact('teklif','sorular','comment','blog','bloglar','slider'));
       }

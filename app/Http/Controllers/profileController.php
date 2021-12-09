@@ -7,14 +7,17 @@ use App\Profil;
 use App\Telep;
 use App\Firma;
 use App\HizmetVerilenSehirler;  
-
+use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Models\User;
 class profileController extends Controller
 {
-    public function index(){
     
-
-      //  $profil= HomeSlider::get();
-       
-        return view('profil');
+    public function show($id) 
+    {
+    
+        $userProfile = User::where('id',$id)->first();
+       return view('profil', compact('userProfile'));
     }
+
 }
