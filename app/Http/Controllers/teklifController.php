@@ -11,10 +11,7 @@ class teklifController extends Controller
 {
     public function index(){
     
-        $teklifler= Teklifler::orderBy('created_at','desc')->paginate(1);
-       
-
-
+        $teklifler= Teklifler::orderBy('created_at','desc')->paginate(5);
         return view('teklifler',compact('teklifler'));
       }
 

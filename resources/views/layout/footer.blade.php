@@ -12,8 +12,19 @@
                         <i class="fa fa-check bg-color-1 p-1 rounded-pill text-white"></i> En iyi nakliyat firmaları
                     </div>
                 </div>
-                <button class="btn btn-lg text-uppercase hemen-fiyat-teklifi-al text-white">HEMEN FİYAT TEKLİFİ AL
+                @if(Auth::user()!==null && Auth::user()->role_id==3)
+                <button class="btn btn-lg text-uppercase hemen-fiyat-teklifi-al text-white" >
+                     <a href="{{ route('iletisim') }}" class=" btn-lg text-uppercase  text-white" style="text-decoration:none;"> HEMEN FİYAT TEKLİFİ AL
+
+                     </a>   
                 </button>
+                @else
+               <button class="btn btn-lg text-uppercase hemen-fiyat-teklifi-al text-white"  data-bs-toggle="modal"
+                        data-bs-target="#teklifAlModal">
+                        HEMEN FİYAT TEKLİFİ AL
+
+                </button>
+                @endif
             </div>
         </div>
     </div>
@@ -46,8 +57,8 @@
                 <h5 class="text-white mb-3">İletişim</h5>
                 <div class=" text-start">
                     <p><a href="{{ route('hakimizda') }}" class="text-secondary text-decoration-none">Hakkımızda</a></p>
-                    <p><a href="" class="text-secondary text-decoration-none">Sık Sorulan Sorular</a></p>
-                    <p><a href="" class="text-secondary text-decoration-none">İletişim</a></p>
+                    <p><a href="{{ route('sorular') }}" class="text-secondary text-decoration-none">Sık Sorulan Sorular</a></p>
+                    <p><a href="{{ route('iletisim') }}" class="text-secondary text-decoration-none">İletişim</a></p>
                 </div>
             </div>
             <div class="col-lg-2">

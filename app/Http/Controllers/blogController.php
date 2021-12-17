@@ -15,7 +15,7 @@ class blogController extends Controller
         $blog= Blog::get();
   
 
-        $bloglar =Bloglar::orderBy('created_at','desc')->paginate(1);
+        $bloglar =Bloglar::orderBy('created_at','desc')->paginate(5);
 
         return view('blog',compact('blog','bloglar'));
       }

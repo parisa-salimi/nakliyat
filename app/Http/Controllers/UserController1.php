@@ -8,7 +8,7 @@ use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Password;
 
 
 class UserController1 extends Controller
@@ -41,22 +41,42 @@ class UserController1 extends Controller
      */
     public function store(Request $request)
     {
-     /*
+   /*
             //dd($request);
             $user = new User;
-           
             $user->password = Hash::make($request->input('password'));
             $user->role_id = 3; 
-
-$user->email = $request->email;
- $user->Telefon = $request->Telefon;
- $user->name = $request->name;
+            $user->email = $request->email;
+            $user->Telefon = $request->Telefon;
+            $user->name = $request->name;
             $user->save(); 
             return redirect()->route('anasayfa');
 
 
 */
 
+            $request->validate([
+                'name' => 'required',
+                'password' => 'required|min:4',
+                'email' => 'required|email|unique:users',
+                'Telefon'=>'required|numeric',
+
+            ], [
+                'name.required' => 'Name is required',
+                'password.required' => 'Password is required'
+            ]);
+    
+            $input = $request->all();
+            $input['password'] = bcrypt($input['password']);
+            User::create($input);
+    
+            return back()->with('success', 'User created successfully.');
+    
+
+
+
+
+/*
 
             $rules=$request->validate([
                 'email'=>['regex:/[^@]+@[^\.]+\..+/', "unique:users,email"],
@@ -66,13 +86,13 @@ $user->email = $request->email;
                 'password' => [
                     'required',
                     'confirmed',
-                    Password::min(8)
+                 Password::min(8)
                         ->mixedCase()
                         ->letters()
                         ->numbers()
                         ->symbols()
                         ->uncompromised(),
-                ],
+                ],   
               ]);
               $validate = Validator::make($request->post(),$rules);
               if($validate->fails()){
@@ -81,38 +101,10 @@ $user->email = $request->email;
               }
 
 
-
+*/
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request)
     {
     
@@ -122,16 +114,7 @@ $user->email = $request->email;
       //dd($request);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
       
 public function logout(){
     Auth::logout();

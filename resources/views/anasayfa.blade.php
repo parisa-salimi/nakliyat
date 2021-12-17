@@ -142,7 +142,8 @@
                 <div class="position-absolute iller-other-metin bg-other-color rounded px-5 py-5 text-center">
                     <h1 class="fs-24  text-white ms-4 mt-2 text-center">En İyi Şehirlerarası Evden Eve Nakliyat
                         Firmalarından Teklif Al Karşılaştır</h1>
-                    <button class="btn btn-lg text-uppercase bg-white text-color-1 my-4">HEMEN FİYAT TEKLİFİ AL
+                    <button class="btn btn-lg text-uppercase bg-white text-color-1 my-4">
+                      <a href="{{ route('iletisim') }}" class=" text-color-1" style="text-decoration:none;">HEMEN FİYAT TEKLİFİ AL</a>  
                     </button>
                 </div>
             </div>
@@ -186,6 +187,8 @@
                         </div>
                     </div> 
                 @endforeach
+                <a href="{{route('sorular')}}" class="btn text-color-1 text-uppercase text-start"> Daha fazla göster <i class="fa fa-angle-right"></i></a>
+
                </div>
             </div>
         </div>
