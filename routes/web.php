@@ -1,12 +1,6 @@
 <?php
 
-/*
-Route::prefix('profile')->name('profile.')->middleware(['LoginControll'])->group(function(){ 
-    Route::get('/{id}', 'profileController@index')->name('user');
 
-  });  
-
-*/
 //contact
 Route::post('/uyeol', 'UserController1@store')->name('uyeol');
 Route::post('/login', 'UserController1@login')->name('login');
@@ -14,8 +8,11 @@ Route::get('/logout','UserController1@logout')->name('logout');
 Route::get('/sorular','homeController@sorular')->name('sorular');
 Route::get('/iletisim','homeController@iletisim')->name('iletisim');
 Route::post('iletisim', ['as'=>'contact.store','uses'=>'homeController@contactPost']);
-Route::get('/telepler','telepController@index')->name('telepler');
-Route::post('/telepler',['as'=>'telep.store','uses'=>'telepController@telepPost']);
+
+Route::get('/talepler','telepController@index')->name('talepler')->middleware('auth');
+Route::post('/talepler','telepController@telepPost')->name('telepPost')->middleware('auth');
+Route::put('/talepler', 'telepController@update')->name('updatetelep')->middleware('auth');
+Route::get('/talepler/{id}', 'telepController@getTalepById')->name('getTelepById')->middleware('auth');
 
 
 
@@ -27,8 +24,11 @@ Route::get('/blog', 'blogController@index')->name('blog');
 Route::get('/blog/{slug}' , 'blogController@blogslug')->name('blogslug');
 Route::get('/teklifler', 'teklifController@index')->name('teklif');
 Route::get('/firma/{slug}', 'firmaController@firmaslug')->name('firmaslug');
-//Route::get('/profil/{id}', 'profileController@show')->name('profile');
+Route::get('/profile/{id}', 'profileController@show')->name('profile')->middleware('auth');
 Route::post('/profile/{id}', 'profileController@show')->name('profile')->middleware('auth');
+Route::put('/profile/{id}', 'profileController@update')->name('updateprofile')->middleware('auth');
+
+
 
 
 

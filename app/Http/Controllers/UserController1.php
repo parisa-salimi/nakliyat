@@ -57,9 +57,10 @@ class UserController1 extends Controller
 
             $request->validate([
                 'name' => 'required',
+                
                 'password' => 'required|min:4',
                 'email' => 'required|email|unique:users',
-                'Telefon'=>'required|numeric',
+                'telephone'=>'required|numeric',
 
             ], [
                 'name.required' => 'Name is required',

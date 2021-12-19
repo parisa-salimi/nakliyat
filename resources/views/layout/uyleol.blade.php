@@ -12,13 +12,16 @@
                     @method('POST')
                         @csrf
                         <div class="form-group  position-relative">
-                            <input type="text" class="form-control p-3 mb-3 @error('name') is_invalid @enderror" name="name" value="{{old('name')}}" placeholder="İsim Soyisim">
+                            <input type="text" class="form-control p-3 mb-3 @error('name') is_invalid @enderror" name="name" value="{{old('name')}}" placeholder="İsim ">
+                        </div>
+                        <div class="form-group  position-relative">
+                            <input type="text" class="form-control p-3 mb-3 @error('soyisim') is_invalid @enderror" name="soyisim" value="{{old('soyisim')}}" placeholder="soyisim ">
                         </div>
                         <div class="form-group position-relative">
                             <input type="text" class="form-control p-3 mb-3" id="email" name="email"  value="{{old('email')}}" placeholder="E-posta Adresiniz">
                         </div>
                         <div class="form-group position-relative">
-                            <input type="number" class="form-control p-3 mb-3" id="Telefon" name="Telefon"  value="{{old('Telefon')}}" placeholder="Telefon Numaranız">
+                            <input type="number" class="form-control p-3 mb-3" id="telephone" name="telephone"  value="{{old('telephone')}}" placeholder="Telefon Numaranız">
                         </div>
                         <div class="form-group position-relative">
                             <input type="password" class="form-control p-3 mb-3" id="password" name="password"  placeholder="Şifreniz">

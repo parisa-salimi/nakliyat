@@ -31,8 +31,6 @@
                     @method('POST')
                             @csrf
                             <button type="submit" class="btn me-2 text-uppercase uye-girisi text-white">    PROFILIM                </button>
-
-
                   </form>
 
                 </button>

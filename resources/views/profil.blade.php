@@ -14,30 +14,20 @@
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<form method="POST" action="/profile/update">
-@method('POST')
+<form method="POST" action="{{route('updateprofile',Auth::user()->id)}}">
+    
+@method('PUT')
 @csrf
+<input  id="id" class="d-none" name="id" value="{{Auth::user()->id}}" hidden>
 <section>
     <div class="container py-5">
         <div class="row py-5">
+    
             <div class="col-lg-12 d-flex justify-content-center">
                 <div class="rounded-pill bg-lightsecondary text-center py-5 " style="width: 200px; height: 200px;">
                     <label for="profil">
                         <i class="fa fa-user fa-7x text-white"></i>
-                        <input type="file" id="profil" class="d-none" name="file" required>
+                        <input type="file" id="profil" class="d-none" name="file">
                     </label>
                 </div>
                 <span class="bg-color-1 text-center text-white pt-1"
@@ -47,165 +37,89 @@
                         </label>
                     </span>
             </div>
+            @foreach ($errors->all() as $error)
+      <div class="alet alert-danger">
+      {{$error}}
+    </div>
+    @endforeach
             <div class="col-lg-12 d-flex justify-content-center align-items-center flex-column mt-4">
                 <h3 class="fs-24 text-muted">Hoşgeldiniz, {{Auth::user()->name}}</h3>
                 <div class="dropdown">
-                    <a class="text-color-1 fs-20 text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Kişisel Bilgiler
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Bilgi bir</a></li>
-                        <li><a class="dropdown-item" href="#">Bilgi iki</a></li>
-                        <li><a class="dropdown-item" href="#">Bilgi üç</a></li>
-                    </ul>
+                   
+                 
                 </div>
             </div>
+            <div class="row justify-content-center py-5">
+            <div class="col-lg-5 mb-4">
+                <button class="btn btn-lg text-uppercase hemen-fiyat-teklifi-al text-white w-100 btn-lg py-3 p-3">
+                     <a href="{{ route('talepler') }}" class=" btn-lg text-uppercase  text-white" style="text-decoration:none;">                        HEMEN FİYAT TEKLİFİ AL
+                     </a>   
+                </button>
+                </div>
+                </div>     
             <div class="row justify-content-center py-5">
                 <div class="col-lg-5 mb-4">
                     <div class="form-group position-relative">
                         <label for="isim" class="text-muted fs-20">İsim</label>
-                        <input type="text" class="form-control px-4 py-3" name="isim" id="isim" placeholder="Enes">
-                        <button class="btn position-absolute text-color-1" style="top: 37px; right: 15px;">değiştir</button>
+                        <input type="text" class="form-control px-4 py-3" name="name" id="name" placeholder="Enes" value="{{Auth::user()->name}}">
+                        
                     </div>
                 </div>
                 <div class="col-lg-5 mb-4">
                     <div class="form-group position-relative">
                         <label for="soyisim" class="text-muted fs-20">Soyisim</label>
-                        <input type="text" class="form-control px-4 py-3" name="soyisim" id="soyisim" placeholder="DERE">
-                        <button class="btn position-absolute text-color-1" style="top: 37px; right: 15px;">değiştir</button>
+                        <input type="text" class="form-control px-4 py-3" name="surname" id="surname" placeholder="DERE" value="{{Auth::user()->surname}}">
+                       
                     </div>
                 </div>
                 <div class="col-lg-5 mb-4">
                     <div class="form-group position-relative">
                         <label for="email" class="text-muted fs-20">E-mail Adresiniz</label>
-                        <input type="email" class="form-control px-4 py-3" name="email" id="email" placeholder="enesdereofficial@gmail.com">
-                        <button class="btn position-absolute text-color-1" style="top: 37px; right: 15px;">değiştir</button>
+                        <input type="email" class="form-control px-4 py-3" name="email" id="email" placeholder="enesdereofficial@gmail.com" value="{{Auth::user()->email}}">
+                      
                     </div>
                 </div>
                 <div class="col-lg-5 mb-4">
                     <div class="form-group position-relative">
                         <label for="telefon" class="text-muted fs-20">Telefon Numaranız</label>
-                        <input type="text" class="form-control px-4 py-3" name="telefon" id="telefon" placeholder="0544 398 07 05">
-                        <button class="btn position-absolute text-color-1" style="top: 37px; right: 15px;">değiştir</button>
+                        <input type="text" class="form-control px-4 py-3" name="telephone" id="telephone" placeholder="0544 398 07 05" value="{{Auth::user()->telephone}}">
+                       
                     </div>
                 </div>
                 <div class="col-lg-5 mb-4">
                     <div class="form-group position-relative">
                         <label for="sifre" class="text-muted fs-20">Şifreniz</label>
-                        <input type="password" class="form-control px-4 py-3" name="sifre" id="sifre" placeholder="**************">
-                        <button class="btn position-absolute text-color-1" style="top: 37px; right: 15px;">değiştir</button>
+                        <input type="password" class="form-control px-4 py-3" name="sifre" id="sifre" placeholder="**************" >
+                       
                     </div>
                 </div>
                 <div class="col-lg-5 mb-4">
                     <div class="form-group position-relative">
                         <label for="adres" class="text-muted fs-20">Adresiniz</label>
-                        <input type="text" class="form-control px-4 py-3" name="adres" id="adres" placeholder="Sancaktepe / İSTANBUL">
-                        <button class="btn position-absolute text-color-1" style="top: 37px; right: 15px;">değiştir</button>
+                        <input type="text" class="form-control px-4 py-3" value="{{Auth::user()->adress}}" name="adress" id="adress" placeholder="Sancaktepe / İSTANBUL" >
+                   
                     </div>
                 </div>
+
+
+          
+
+                
 
                 <div class="col-lg-10">
-                    <button class="btn bg-color-1 text-white w-100 btn-lg py-3"> BİLGİLERİ KAYDET</button>
+               
+                    <button class="btn bg-color-1 text-white w-100 btn-lg py-3" type="submit"> BİLGİLERİ KAYDET</button>
+                
                 </div>
+
+                
             </div>
-            <div class="row justify-content-center py-5">
-                <div class="dropdown text-center mb-5">
-                    <a class="text-color-1 fs-20 text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Talep Oluştur
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Talep bir</a></li>
-                        <li><a class="dropdown-item" href="#">Talep iki</a></li>
-                        <li><a class="dropdown-item" href="#">Talep üç</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="telefon" class="text-muted fs-20">Telefon Numaranız</label>
-                        <input type="text" class="form-control px-4 py-3" name="telefon" id="telefon" >
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="email" class="text-muted fs-20">E-mail Adresiniz</label>
-                        <input type="email" class="form-control px-4 py-3" name="email" id="email">
-                    </div>
-                </div>
-
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_adres" class="text-muted fs-20">Eşyaların Bulunduğu Adres</label>
-                        <textarea name="esya_adres" id="esya_adres" rows="5" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="tasinacak_adres" class="text-muted fs-20">Taşınacak Adres Bilgisi</label>
-                        <textarea name="tasinacak_adres" id="tasinacak_adres" rows="5" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_bul_kat_sayisi" class="text-muted fs-20">Eşyaların Bulunduğu Kat Sayısı</label>
-                        <input type="text" class="form-control px-4 py-3" name="esya_bul_kat_sayisi" id="esya_bul_kat_sayisi">
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_tas_kat_sayisi" class="text-muted fs-20">Eşyaların Taşınacağı Kat Sayısı</label>
-                        <input type="text" class="form-control px-4 py-3" name="esya_tas_kat_sayisi" id="esya_tas_kat_sayisi">
-                    </div>
-                </div>
-
-                <div class="col-lg-10 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_hakkinda_bilgi" class="text-muted fs-20">Eşyalarınız Hakkında Detaylı Bilgi</label>
-                        <textarea name="esya_hakkinda_bilgi" id="esya_hakkinda_bilgi" rows="8" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 mb-4">
-                    <div class="form-check float-start me-3">
-                        <input class="form-check-input" style="width: 1.5em!important; height: 1.5em!important;" type="checkbox" value="" id="vbo">
-                        <label class="form-check-label text-muted fs-20 ms-2" for="vbo">
-                            Verdiğim bilgileri onaylıyorum.
-                        </label>
-                    </div>
-                    <div class="form-check float-start">
-                        <input class="form-check-input" style="width: 1.5em!important; height: 1.5em!important;" type="checkbox" value="" id="daig">
-                        <label class="form-check-label text-muted fs-20 ms-2" for="daig">
-                            Direk arayarak iletişime geçin.
-                        </label>
-                    </div>
-                </div>
-
-                <div class="col-lg-10">
-                    <button class="btn bg-color-1 text-white w-100 btn-lg py-3"> TEKLİF İSTE</button>
-                </div>
-            </div>
+           
         </div>
     </div>
 </section>
 
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
