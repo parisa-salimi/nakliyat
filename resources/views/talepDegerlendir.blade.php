@@ -18,7 +18,118 @@
 <section>
     <div class="container py-5">
         <div class="row">
-        <div class="row justify-content-center mt-5">
+
+        <form method="post" action="{{route('teklifDegerlendirPost')}}">
+            @method('POST')
+            @csrf
+            <input  id="id" class="d-none" name="id" value="{{$telepFirst->id}}" hidden>
+
+            @foreach ($errors->all() as $error)
+      <div class="alet alert-danger">
+      {{$error}}
+    </div>
+    @endforeach
+
+            <div class="row justify-content-center mb-5">
+                <div class="dropdown text-center mb-5">
+                    <a class="text-color-1 fs-20 text-decoration-none fw-bold" role="button">
+                        Teklif Yap
+                    </a>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="telefon" class="text-muted fs-20">Telefon Numarası</label>
+                        <input disabled type="text" class="form-control px-4 py-3" value="{{$telepFirst->telefon}}" name="telefon" id="telefon" >
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="email" class="text-muted fs-20">E-mail Adresi</label>
+                        <input disabled type="email" class="form-control px-4 py-3" value="{{$telepFirst->email}}" name="email" id="email">
+                    </div>
+                </div>
+
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="esya_adres" class="text-muted fs-20">Eşyaların Bulunduğu Adres</label>
+                        <textarea disabled name="esya_adres" id="esya_adres"rows="5" class="form-control">{{$telepFirst->esya_adres}}</textarea>
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="tasinacak_adres" class="text-muted fs-20">Taşınacak Adres Bilgisi</label>
+                        <textarea disabled name="tasinacak_adres"  id="tasinacak_adres" rows="5" class="form-control">{{$telepFirst->tasinacak_adres}}</textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="esya_bul_kat_sayisi" class="text-muted fs-20">Eşyaların Bulunduğu Kat Sayısı</label>
+                        <input disabled type="text" class="form-control px-4 py-3" value="{{$telepFirst->esya_bul_kat_sayisi}}" name="esya_bul_kat_sayisi" id="esya_bul_kat_sayisi">
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="esya_tas_kat_sayisi" class="text-muted fs-20">Eşyaların Taşınacağı Kat Sayısı</label>
+                        <input disabled type="text" class="form-control px-4 py-3" value="{{$telepFirst->esya_tas_kat_sayisi}}" name="esya_tas_kat_sayisi" id="esya_tas_kat_sayisi">
+                    </div>
+                </div>
+
+                <div class="col-lg-10 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="esya_hakkinda_bilgi" class="text-muted fs-20">Eşyalarınız Hakkında Detaylı Bilgi</label>
+                        <textarea disabled name="esya_hakkinda_bilgi" id="esya_hakkinda_bilgi" rows="8" class="form-control">{{$telepFirst->esya_hakkinda_bilgi}}</textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-10 mb-4">
+                    <div class="form-check float-start me-3">
+                        <input disabled class="form-check-input" style="width: 1.5em!important; height: 1.5em!important;" type="checkbox" id="vbo" @if($telepFirst->bilgiler_onayliyin) checked @endif name="bilgiler_onayliyin" >
+                        <label class="form-check-label text-muted fs-20 ms-2" for="vbo">
+                            Verdiğim bilgileri onaylıyorum.
+                        </label>
+                    </div>
+                    <div class="form-check float-start">
+                        <input disabled class="form-check-input" style="width: 1.5em!important; height: 1.5em!important;" type="checkbox"  id="daig" @if($telepFirst->iletisima_gir) checked @endif name="iletisima_gir">
+                        <label class="form-check-label text-muted fs-20 ms-2" for="daig">
+                            Direk arayarak iletişime geçin.
+                        </label>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                        <label for="teklif_fiyati" class="text-muted fs-20">Teklif Fiyatı</label>
+                        <input type="text" class="form-control px-4 py-3" value="{{$telepFirst->teklif_fiyati}}" name="teklif_fiyati" id="teklif_fiyati">
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                   
+                </div>
+
+             
+
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                    <button class="btn bg-color-1 text-white w-100 btn-lg py-3"> TEKLİF YAP</button>
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="form-group position-relative">
+                    <button type="reset" class="btn bg-color-1 text-white w-100 btn-lg py-3"  onclick="window.location.href='{{ route('companyTaleDegerlendir') }}';"> VAZGEÇ</button>
+                    </div>
+                </div>
+
+            
+            </div>
+
+            </form>
+
+
+
+
+            <div class="row justify-content-center mt-5">
                 <div class="col-lg-12">
 
                     <div class="table-responsive">
@@ -30,7 +141,8 @@
                             <th>Email</th>
                             <th>Eşyaların Bulunduğu Adres</th>
                             <th>Taşınacak Adres Bilgisi</th>
-                            <th>İşlemler</th>
+                            <th>Yapilan Teklif</th>
+                            <th>Islemler</th>
                             </thead>
                             <tbody>
                     @foreach($telep as $us)
@@ -39,11 +151,8 @@
                                 <td> {{ $us->email }}</td>
                                 <td>  {{ $us->esya_adres }}</td>
                                 <td> {{ $us->tasinacak_adres }}</td>
-                                <td> <button class="btn btn-success">
-                     <a href="{{ route('getTelepById',$us->id) }}" class=" btn-xs text-uppercase  text-white" style="text-decoration:none;">DÜZENLE</a></button><button class="btn btn-warning">
-                     <a href="{{ route('teklif',$us->id) }}" class=" btn-xs text-uppercase  text-white" style="text-decoration:none;">TEKLİFLER</a></button></td>
-                               
-                            
+                                <td> {{ $us->teklif_fiyati }}</td>
+                                <td> <a href="{{ route('getTalepDegerlendirById',$us->id) }}">Düzenle</a></td>
                             </tr>
                     @endforeach
                             </tbody>
@@ -64,104 +173,6 @@
                     </nav>
                 </div>
             </div>
-        <form method="post" action="{{route('telepPost')}}">
-            @method('POST')
-            @csrf
-            <input  id="id" class="d-none" name="id" value="{{$telepFirst->id}}" hidden>
-
-            @foreach ($errors->all() as $error)
-      <div class="alet alert-danger">
-      {{$error}}
-    </div>
-    @endforeach
-
-            <div class="row justify-content-center mb-5">
-                <div class="dropdown text-center mb-5">
-                    <a class="text-color-1 fs-20 text-decoration-none fw-bold" role="button">
-                        Talep Oluştur
-                    </a>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="telefon" class="text-muted fs-20">Telefon Numaranız</label>
-                        <input type="text" class="form-control px-4 py-3" value="{{$telepFirst->telefon}}" name="telefon" id="telefon" >
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="email" class="text-muted fs-20">E-mail Adresiniz</label>
-                        <input type="email" class="form-control px-4 py-3" value="{{$telepFirst->email}}" name="email" id="email">
-                    </div>
-                </div>
-
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_adres" class="text-muted fs-20">Eşyaların Bulunduğu Adres</label>
-                        <textarea name="esya_adres" id="esya_adres"rows="5" class="form-control">{{$telepFirst->esya_adres}}</textarea>
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="tasinacak_adres" class="text-muted fs-20">Taşınacak Adres Bilgisi</label>
-                        <textarea name="tasinacak_adres"  id="tasinacak_adres" rows="5" class="form-control">{{$telepFirst->tasinacak_adres}}</textarea>
-                    </div>
-                </div>
-
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_bul_kat_sayisi" class="text-muted fs-20">Eşyaların Bulunduğu Kat Sayısı</label>
-                        <input type="text" class="form-control px-4 py-3" value="{{$telepFirst->esya_bul_kat_sayisi}}" name="esya_bul_kat_sayisi" id="esya_bul_kat_sayisi">
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_tas_kat_sayisi" class="text-muted fs-20">Eşyaların Taşınacağı Kat Sayısı</label>
-                        <input type="text" class="form-control px-4 py-3" value="{{$telepFirst->esya_tas_kat_sayisi}}" name="esya_tas_kat_sayisi" id="esya_tas_kat_sayisi">
-                    </div>
-                </div>
-
-                <div class="col-lg-10 mb-4">
-                    <div class="form-group position-relative">
-                        <label for="esya_hakkinda_bilgi" class="text-muted fs-20">Eşyalarınız Hakkında Detaylı Bilgi</label>
-                        <textarea name="esya_hakkinda_bilgi" id="esya_hakkinda_bilgi" rows="8" class="form-control">{{$telepFirst->esya_hakkinda_bilgi}}</textarea>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 mb-4">
-                    <div class="form-check float-start me-3">
-                        <input class="form-check-input" style="width: 1.5em!important; height: 1.5em!important;" type="checkbox" id="vbo" @if($telepFirst->bilgiler_onayliyin) checked @endif name="bilgiler_onayliyin" >
-                        <label class="form-check-label text-muted fs-20 ms-2" for="vbo">
-                            Verdiğim bilgileri onaylıyorum.
-                        </label>
-                    </div>
-                    <div class="form-check float-start">
-                        <input class="form-check-input" style="width: 1.5em!important; height: 1.5em!important;" type="checkbox"  id="daig" @if($telepFirst->iletisima_gir) checked @endif name="iletisima_gir">
-                        <label class="form-check-label text-muted fs-20 ms-2" for="daig">
-                            Direk arayarak iletişime geçin.
-                        </label>
-                    </div>
-                </div>
-
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                    <button class="btn bg-color-1 text-white w-100 btn-lg py-3"> TEKLİF İSTE</button>
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4">
-                    <div class="form-group position-relative">
-                    <button type="reset" class="btn bg-color-1 text-white w-100 btn-lg py-3"  onclick="window.location.href='{{ route('talepler') }}';"> VAZGEÇ</button>
-                    </div>
-                </div>
-
-            
-            </div>
-
-            </form>
-
-
-
-
-         
         </div>
     </div>
 </section>

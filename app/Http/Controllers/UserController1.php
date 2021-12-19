@@ -138,7 +138,7 @@ public function login(Request $request){
        
        $this->validate($request,$rules); 
      
-
+   
 
        if(Auth::guard('web')->attempt(['email'=>$data['email'],'password'=>$data['password']])){
 

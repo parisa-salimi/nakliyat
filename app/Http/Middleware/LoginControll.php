@@ -16,7 +16,7 @@ class LoginControll
      */
     public function handle($request, Closure $next)
     {
-  
+        dd(Auth::user());
         if(Auth::user()==null || (Auth::user()->role_id!=3 && Auth::user()->role_id!=4)){
             return redirect()->route('login');
           }

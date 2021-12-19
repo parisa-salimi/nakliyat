@@ -13,22 +13,23 @@ Route::get('/talepler','telepController@index')->name('talepler')->middleware('a
 Route::post('/talepler','telepController@telepPost')->name('telepPost')->middleware('auth');
 Route::put('/talepler', 'telepController@update')->name('updatetelep')->middleware('auth');
 Route::get('/talepler/{id}', 'telepController@getTalepById')->name('getTelepById')->middleware('auth');
-
-
-
-
 //pages
 Route::get('/', 'homeController@index')->name('anasayfa');
 Route::get('/hakimizda', 'hakimizdaController@index')->name('hakimizda');
 Route::get('/blog', 'blogController@index')->name('blog');
 Route::get('/blog/{slug}' , 'blogController@blogslug')->name('blogslug');
-Route::get('/teklifler', 'teklifController@index')->name('teklif');
+Route::get('/teklifler/{id}', 'teklifController@index')->name('teklif');
 Route::get('/firma/{slug}', 'firmaController@firmaslug')->name('firmaslug');
 Route::get('/profile/{id}', 'profileController@show')->name('profile')->middleware('auth');
 Route::post('/profile/{id}', 'profileController@show')->name('profile')->middleware('auth');
 Route::put('/profile/{id}', 'profileController@update')->name('updateprofile')->middleware('auth');
 
 
+////Company
+Route::get('/companyProfile/{id}', 'profileController@update')->name('companyProfile')->middleware('auth');
+Route::get('/talepDegerlendir', 'telepController@taleDegerlendirIndex')->name('companyTaleDegerlendir')->middleware('auth');
+Route::get('/talepDegerlendir/{id}', 'telepController@getTalepDegerlendirById')->name('getTalepDegerlendirById')->middleware('auth');
+Route::post('/talepDegerlendir', 'telepController@teklifDegerlendirPost')->name('teklifDegerlendirPost')->middleware('auth');
 
 
 

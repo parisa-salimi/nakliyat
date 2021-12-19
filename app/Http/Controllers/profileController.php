@@ -20,7 +20,10 @@ class profileController extends Controller
         $userProfile = User::where('id',$id)->first();
         if(Auth::user()->role_id==3){
             return view('profil', compact('userProfile'));
-        }    
+        }  
+        if(Auth::user()->role_id==4){
+            return view('companyProfile', compact('userProfile'));
+        }   
     }
 
     public function update(Request $request) 

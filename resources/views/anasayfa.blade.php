@@ -98,11 +98,23 @@
                 
                 @endforeach    
                    
-                    <div class="col-lg-5 py-4">
-                        <button class="btn btn-lg w-100 text-uppercase hemen-fiyat-teklifi-al text-white">HEMEN FİYAT
+                @if(Auth::user()!==null && Auth::user()->role_id==3)
+                <div class="col-lg-5 py-4">
+                        <button class="btn btn-lg w-100 text-uppercase hemen-fiyat-teklifi-al text-white">
+                        <a href="{{ route('talepler') }}" class=" btn-lg text-uppercase  text-white" style="text-decoration:none;">                     
+                    EMEN FİYAT
+                            TEKLİFİ AL </a>
+                        </button>
+                    </div>
+                @else
+            
+                <div class="col-lg-5 py-4">
+                        <button class="btn btn-lg w-100 text-uppercase hemen-fiyat-teklifi-al text-white" data-bs-toggle="modal" data-bs-target="#teklifAlModal">HEMEN FİYAT
                             TEKLİFİ AL
                         </button>
                     </div>
+                @endif
+                
                 </div>
             </div>
             <div class="col-lg-4 d-flex justify-content-center align-items-end">
@@ -218,9 +230,6 @@
                 <h2>HEMEN <span class="text-color-1">ŞEHİR İÇİ VE ŞEHİRLER ARASI</span> TEKLİF AL!</h2>
                 <div class="row">
                     <div class="col-lg-12 text-center">
-
-
-
                         <button type="button" class="btn me-2 text-uppercase uye-girisi text-white my-4 py-2" data-bs-toggle="modal"
                                 data-bs-target="#girisyapModal">TEKLİF AL
                         </button>

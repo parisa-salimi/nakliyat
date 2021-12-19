@@ -16,6 +16,7 @@ use App\Iletisim;
 use App\ContactForm;
 use App\Telep;
 use App\User;
+use App\FirmaUserRelation;
 use Validator;
 
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +38,72 @@ class telepController extends Controller
     }*/
     public function index(){
       $telepFirst= new Telep;
-        $telep= Telep::where("user_id",Auth::user()->id)->paginate(2);
+        $telep= Telep::where("user_id",Auth::user()->id)->paginate(5);
         return view('telepler',compact('telep','telepFirst'));
       }
 
+      public function firmaTelepList(){
+        $firma= FirmaUserRelation::where('user_id',Auth::user()->id)->first();
+        $teklif= Teklifler::where('firma_id',$firma->firma_id)->get();
+        $telep= Telep::paginate(10);
+        foreach ($telep as $deger)
+        {
+          foreach ($teklif as $deger2)
+          {
+            if($deger->id==$deger2->talep_id) {
+              $deger->teklif_fiyati=$deger2->teklif_fiyati;
+            } 
+          } 
+
+        }
+        return $telep;
+      }
+
+      public function taleDegerlendirIndex(){
+          $telepFirst= new Telep;
+          $telep=$this->firmaTelepList();
+          return view('talepDegerlendir',compact('telep','telepFirst'));
+        }
+  
+        public function getTalepDegerlendirById($id){
+          $telepFirst= Telep::where("id",$id)->first();
+          $telep=$this->firmaTelepList();
+          return view('talepDegerlendir',compact('telep','telepFirst'));
+        }
+
+        public function teklifDegerlendirPost(Request $request) 
+        {
+         // dd($request);
+        $request->validate([
+         'teklif_fiyati' => 'required|numeric',
+         'id' => 'required',
+     ], [
+         'teklif_fiyati.required' => 'Fiyat Giriniz ',
+         'teklif_fiyati.numeric' => 'Numerik bir deger giriniz',
+         'id.required' => 'Teklif yapmak istediginiz satiri secin.',
+     ]);
+
+     $talep= Telep::where('id',$request->id)->first();
+     $firma= FirmaUserRelation::where('user_id',Auth::user()->id)->first();
+
+     $teklif = new Teklifler();
+
+     $oldTeklif=Teklifler::where('firma_id',$firma->firma_id)->where('talep_id',$talep->id)->first();
+     if($oldTeklif)
+     {
+      $teklif=$oldTeklif;
+    }
+     $teklif->user_id=Auth::user()->id;
+     $teklif->firma_id=$firma->firma_id;
+     $teklif->talep_id=$request->id;
+     $teklif->teklif_fiyati=$request->teklif_fiyati;
+     $teklif->save();
+         return redirect()->route('companyTaleDegerlendir'); 
+         
+    }
       public function getTalepById($id){
         $telepFirst= Telep::where("id",$id)->first();
-        $telep= Telep::where("user_id",Auth::user()->id)->paginate(2);
+        $telep= Telep::where("user_id",Auth::user()->id)->paginate(5);
         return view('telepler',compact('telep','telepFirst'));
       }
 

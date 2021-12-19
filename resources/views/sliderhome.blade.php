@@ -16,7 +16,7 @@
 
                 @if(Auth::user()!==null && Auth::user()->role_id==3)
                 <button class="btn btn-lg text-uppercase hemen-fiyat-teklifi-al text-white" >
-                     <a href="{{ route('iletisim') }}" class=" btn-lg text-uppercase  text-white" style="text-decoration:none;">                        {!! $slider->button !!}
+                     <a href="{{ route('talepler') }}" class=" btn-lg text-uppercase  text-white" style="text-decoration:none;">                        {!! $slider->button !!}
                      </a>   
                 </button>
                 @else
